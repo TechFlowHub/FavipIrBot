@@ -16,11 +16,11 @@ class Bot:
         self.link = "https://web.whatsapp.com/"
         self.xpaths = {
             "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
-            "unread_bubble": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[3]/div[1]/div/div/div[1]/div/div/div/div[2]/div[2]/div[2]/span[1]/div[2]/span"
         }
         self._class = {
             "input_chat": "selectable-text copyable-text x15bjb6t x1n2onr6",
-            "last_message": "x9f619 x1hx0egp x1yrsyyn x1ct7el4 x1dm7udd xwib8y2"
+            "last_message": "_akbu",
+            "unread_bubble": "_ahlk"
         }
         
         self.main()
@@ -43,7 +43,7 @@ class Bot:
     
     def openUnreadMessage(self):
         try:
-            unread_bubble = self.driver.find_element(By.XPATH, self.xpaths["unread_bubble"])
+            unread_bubble = self.driver.find_element(By.CLASS_NAME, self._class["unread_bubble"])
             unread_bubble.click()
             sleep(5)
             print("unread_bubble cliked")
@@ -77,6 +77,7 @@ class Bot:
             self.login()
             self.openUnread()
             self.openUnreadMessage()
+            self.readLastMessage()
             while True:
                 sleep(10)
         except KeyboardInterrupt:
