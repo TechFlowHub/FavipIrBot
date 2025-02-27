@@ -1,2 +1,3 @@
-2025/02/27-16:33:31.772 7f73 Creating DB /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/GCM Store since it was missing.
-2025/02/27-16:33:31.775 7f73 Reusing MANIFEST /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/GCM Store/MANIFEST-000001
+2025/02/27-17:24:46.123 9662 Reusing MANIFEST /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/GCM Store/MANIFEST-000001
+2025/02/27-17:24:46.123 9662 Recovering log #3
+2025/02/27-17:24:46.124 9662 Reusing old log /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/GCM Store/000003.log 

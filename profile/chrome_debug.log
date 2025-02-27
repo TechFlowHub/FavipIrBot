@@ -1,27 +1,35 @@
-[33691:33691:0227/163745.870973:WARNING:wayland_object.cc(123)] Binding to gtk_shell1 version 4 but version 5 is available.
-[33691:33691:0227/163745.871066:WARNING:wayland_object.cc(123)] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
-[33691:33691:0227/163745.871117:WARNING:wayland_object.cc(123)] Binding to zwp_linux_dmabuf_v1 version 3 but version 5 is available.
-[33691:33691:0227/163746.048773:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-245350905893 Created for project_number: 245350905893
-[33691:33691:0227/163746.048808:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 245350905893 project
-[33691:33691:0227/163746.048814:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-245350905893 Starting
-[33691:33691:0227/163746.048835:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-585406161706 Created for project_number: 585406161706
-[33691:33691:0227/163746.048840:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 585406161706 project
-[33691:33691:0227/163746.048844:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-585406161706 Starting
-[33691:33691:0227/163746.081409:WARNING:wayland_surface.cc(183)] Server doesn't support zcr_alpha_compositing_v1.
-[33691:33691:0227/163746.081443:WARNING:wayland_surface.cc(198)] Server doesn't support overlay_prioritizer.
-[33691:33691:0227/163746.081449:WARNING:wayland_surface.cc(213)] Server doesn't support wp_content_type_v1
-[33691:33691:0227/163746.081453:WARNING:wayland_surface.cc(232)] Server doesn't support zcr_color_management_surface.
-[33737:33737:0227/163746.103309:WARNING:sandbox_linux.cc(420)] InitializeSandbox() called with multiple threads in process gpu-process.
-[33737:33737:0227/163746.104415:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
-[33691:33691:0227/163746.742793:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
-[33691:33691:0227/163746.847605:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/ys/r/owesGpRKMQB.js (158)
-[33691:33691:0227/163752.658161:WARNING:invalidation_listener_impl.cc(110)] ProfileInvalidationProvider-585406161706 Destroying
-[33691:33691:0227/163752.658217:WARNING:invalidation_listener_impl.cc(110)] ProfileInvalidationProvider-245350905893 Destroying
-[33691:33691:0227/163752.666854:ERROR:wayland_event_watcher.cc(47)] libwayland: warning: queue 0x3a4c00030e00 destroyed while proxies still attached:
+[40204:40204:0227/180105.002056:WARNING:wayland_object.cc(123)] Binding to gtk_shell1 version 4 but version 5 is available.
+[40204:40204:0227/180105.002240:WARNING:wayland_object.cc(123)] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
+[40204:40204:0227/180105.002340:WARNING:wayland_object.cc(123)] Binding to zwp_linux_dmabuf_v1 version 3 but version 5 is available.
+[40204:40204:0227/180105.469533:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-245350905893 Created for project_number: 245350905893
+[40204:40204:0227/180105.469629:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 245350905893 project
+[40204:40204:0227/180105.469643:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-245350905893 Starting
+[40204:40204:0227/180105.469694:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-585406161706 Created for project_number: 585406161706
+[40204:40204:0227/180105.469710:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 585406161706 project
+[40204:40204:0227/180105.469721:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-585406161706 Starting
+[40204:40204:0227/180105.554614:WARNING:wayland_surface.cc(183)] Server doesn't support zcr_alpha_compositing_v1.
+[40204:40204:0227/180105.554701:WARNING:wayland_surface.cc(198)] Server doesn't support overlay_prioritizer.
+[40204:40204:0227/180105.554716:WARNING:wayland_surface.cc(213)] Server doesn't support wp_content_type_v1
+[40204:40204:0227/180105.554726:WARNING:wayland_surface.cc(232)] Server doesn't support zcr_color_management_surface.
+[40250:40250:0227/180105.608277:WARNING:sandbox_linux.cc(420)] InitializeSandbox() called with multiple threads in process gpu-process.
+[40250:40250:0227/180105.610281:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[40204:40204:0227/180106.463643:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
+[40204:40204:0227/180106.579372:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yb/r/BRUGOqFYgyH.js (158)
+[40204:40204:0227/180116.224095:WARNING:invalidation_listener_impl.cc(263)] ProfileInvalidationProvider-245350905893 Registration token: eV1qRRwBrcc:APA91bGuQpJojGsH0LrXSdTwlrsuZfEX9PE-NgnzI0cKhhkC16BopGng-xaOqtu2s0m6tPtOjV7NfUt5gJOgPsudT0pwSikdmqRpla54QLe4E0wLtwDBiRo
+[40204:40204:0227/180116.224172:ERROR:fm_registration_token_uploader.cc(186)] Client is missing for kUser scope
+[40204:40204:0227/180116.224209:WARNING:invalidation_listener_impl.cc(263)] ProfileInvalidationProvider-585406161706 Registration token: cHSo_xxV8H8:APA91bF3TjybHeZ8UAkzbFyP4CfIeWrs_F6PpSgI2j8hIr2fii8U_qDxxhDwnZS_ikbocwAj7FaIzRHaB-VkByXDyHbfiO6MkCo7ih11ok2OYPrgqInGUsE
+[40204:40204:0227/180116.224224:ERROR:fm_registration_token_uploader.cc(186)] Client is missing for kUser scope
+[40204:40230:0227/180116.739871:ERROR:registration_request.cc(291)] Registration response error message: DEPRECATED_ENDPOINT
+[40204:40204:0227/180117.168900:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yb/r/BRUGOqFYgyH.js (158)
+[40204:40204:0227/180128.236581:WARNING:invalidation_listener_impl.cc(110)] ProfileInvalidationProvider-585406161706 Destroying
+[40204:40204:0227/180128.236672:WARNING:invalidation_listener_impl.cc(110)] ProfileInvalidationProvider-245350905893 Destroying
+[40204:40204:0227/180128.267017:ERROR:wayland_event_watcher.cc(47)] libwayland: warning: queue 0x306400058e00 destroyed while proxies still attached:
 
-[33691:33691:0227/163752.666988:ERROR:wayland_event_watcher.cc(47)] libwayland:   wl_buffer#50 still attached
+[40204:40204:0227/180128.267303:ERROR:wayland_event_watcher.cc(47)] libwayland:   wl_buffer#46 still attached
 
-[33691:33691:0227/163752.667039:ERROR:wayland_event_watcher.cc(47)] libwayland:   wl_shm_pool#44 still attached
+[40204:40204:0227/180128.267391:ERROR:wayland_event_watcher.cc(47)] libwayland:   wl_buffer#50 still attached
 
-[33739:33776:0227/163752.673443:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:248 to client_task_runner_.
-[33739:33776:0227/163752.673514:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:248 to client_task_runner_.
+[40204:40204:0227/180128.267476:ERROR:wayland_event_watcher.cc(47)] libwayland:   wl_shm_pool#45 still attached
+
+[40255:40291:0227/180128.270866:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:248 to client_task_runner_.
+[40255:40291:0227/180128.270989:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:248 to client_task_runner_.

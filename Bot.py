@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
 from time import sleep
 
 class Bot:
@@ -13,26 +14,74 @@ class Bot:
 
         self.driver = webdriver.Chrome(options=chrome_options)
         self.link = "https://web.whatsapp.com/"
+        self.xpaths = {
+            "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
+            "unread_bubble": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[3]/div[1]/div/div/div[1]/div/div/div/div[2]/div[2]/div[2]/span[1]/div[2]/span"
+        }
+        self._class = {
+            "input_chat": "selectable-text copyable-text x15bjb6t x1n2onr6",
+            "last_message": "x9f619 x1hx0egp x1yrsyyn x1ct7el4 x1dm7udd xwib8y2"
+        }
         
         self.main()
 
     def login(self):
         print("Bot Inicializado")
-        wait = WebDriverWait(self.driver, 10)
         self.driver.get(self.link)
         print("Waiting for you to scan your QR code...")
-        sleep(25)
-
+        sleep(10)
         print("QR Code scanned. Keeping the session active...")
+
+    def openUnread(self):
         try:
+            unread_button = self.driver.find_element(By.XPATH, self.xpaths["unread"])
+            unread_button.click()
+            sleep(5)
+            print("Unread message opened.")
+        except Exception as e:
+            print(f"Error in openUnread: {e}")
+    
+    def openUnreadMessage(self):
+        try:
+            unread_bubble = self.driver.find_element(By.XPATH, self.xpaths["unread_bubble"])
+            unread_bubble.click()
+            sleep(5)
+            print("unread_bubble cliked")
+        except Exception as e:
+            print(f"error in unread_bubble: {e}")
+
+    def sendMenssage(self):
+        try:
+            sendMessage_v = self.driver.find_element(By.CLASS_NAME, self._class["input_chat"])
+            sendMessage_v.click()
+            print("menssage sent")
+        except Exception as e:
+            print(f"error in sendMessage: {e}")
+    
+    def readLastMessage(self):
+        try:
+            readLastMessage_v = self.driver.find_elements(By.CLASS_NAME, self._class["last_message"])
+            if readLastMessage_v:
+                last_element = readLastMessage_v[-1]
+                last_text = last_element.text
+                print(f"Last message: {last_text}")
+                return last_text
+            else:
+                print("No elements found with the specified class.")
+                return None
+        except Exception as e:
+            print(f"Error in getLastMessage: {e}")
+            return None
+    def main(self):
+        try:
+            self.login()
+            self.openUnread()
+            self.openUnreadMessage()
             while True:
                 sleep(10)
         except KeyboardInterrupt:
             print("Bot encerrado manualmente.")
+        finally:
             self.driver.quit()
-    def openUnread(self):
-        pass
-    def main(self):
-        self.login()
 
 bot = Bot()
