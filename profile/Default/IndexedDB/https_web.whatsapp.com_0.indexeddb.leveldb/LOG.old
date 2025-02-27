@@ -1,0 +1,15 @@
+2025/02/27-16:33:49.251 8116 Reusing MANIFEST /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2025/02/27-16:33:49.251 8116 Recovering log #52
+2025/02/27-16:33:49.268 8116 Reusing old log /home/vinicius/projects/FavipIrBot-env/FavipIrBot/profile/Default/IndexedDB/https_web.whatsapp.com_0.indexeddb.leveldb/000052.log 
+2025/02/27-16:33:49.268 8116 Delete type=2 #51
+2025/02/27-16:33:49.268 8116 Delete type=2 #53
+2025/02/27-16:33:49.268 8116 Delete type=2 #50
+2025/02/27-16:33:49.799 8118 Level-0 table #58: started
+2025/02/27-16:33:49.807 8118 Level-0 table #58: 441525 bytes OK
+2025/02/27-16:33:49.808 8118 Delete type=0 #52
+2025/02/27-16:33:49.809 8116 Manual compaction at level-0 from '\x00\x19\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1a\x00\x00\x00' @ 0 : 0; will stop at (end)
+2025/02/27-16:33:50.969 8117 Compacting 1@1 + 2@2 files
+2025/02/27-16:33:51.006 8117 Generated table #59@1: 32597 keys, 2200394 bytes
+2025/02/27-16:33:51.026 8117 Generated table #60@1: 19071 keys, 858936 bytes
+2025/02/27-16:33:51.026 8117 Compacted 1@1 + 2@2 files => 3059330 bytes
+2025/02/27-16:33:51.027 8117 compacted to: files[ 0 0 2 0 0 0 0 ]
