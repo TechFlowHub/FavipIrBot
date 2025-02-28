@@ -1,8 +1,0 @@
-[19232:19232:0228/002551.695770:INFO:chrome_browser_cloud_management_controller.cc(196)] No machine level policy manager exists.
-[19280:19280:0228/002551.830087:WARNING:sandbox_linux.cc(420)] InitializeSandbox() called with multiple threads in process gpu-process.
-[19280:19280:0228/002551.831073:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
-[19232:19232:0228/002552.544239:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
-[19232:19232:0228/002552.616479:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yX/r/vKJE9-r0Lcb.js (158)
-[19280:19280:0228/002557.496759:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 1 times!
-[19280:19280:0228/002557.497498:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 2 times!
-[19280:19280:0228/002559.806685:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 3 times!
