@@ -1,55 +1,8 @@
-[11272:11272:0227/205706.341999:WARNING:wayland_object.cc(123)] Binding to gtk_shell1 version 4 but version 5 is available.
-[11272:11272:0227/205706.342125:WARNING:wayland_object.cc(123)] Binding to zwp_pointer_gestures_v1 version 1 but version 3 is available.
-[11272:11272:0227/205706.342171:WARNING:wayland_object.cc(123)] Binding to zwp_linux_dmabuf_v1 version 3 but version 5 is available.
-[11272:11272:0227/205706.535045:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-245350905893 Created for project_number: 245350905893
-[11272:11272:0227/205706.535210:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 245350905893 project
-[11272:11272:0227/205706.535217:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-245350905893 Starting
-[11272:11272:0227/205706.535354:WARNING:invalidation_listener_impl.cc(104)] ProfileInvalidationProvider-585406161706 Created for project_number: 585406161706
-[11272:11272:0227/205706.535373:WARNING:fm_registration_token_uploader.cc(155)] Starting FmRegistrationTokenUploader for kUser scope, 585406161706 project
-[11272:11272:0227/205706.535378:WARNING:invalidation_listener_impl.cc(150)] ProfileInvalidationProvider-585406161706 Starting
-[11272:11272:0227/205706.571224:WARNING:wayland_surface.cc(183)] Server doesn't support zcr_alpha_compositing_v1.
-[11272:11272:0227/205706.571284:WARNING:wayland_surface.cc(198)] Server doesn't support overlay_prioritizer.
-[11272:11272:0227/205706.571291:WARNING:wayland_surface.cc(213)] Server doesn't support wp_content_type_v1
-[11272:11272:0227/205706.571296:WARNING:wayland_surface.cc(232)] Server doesn't support zcr_color_management_surface.
-[11321:11321:0227/205706.598460:WARNING:sandbox_linux.cc(420)] InitializeSandbox() called with multiple threads in process gpu-process.
-[11321:11321:0227/205706.599513:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
-[11272:11272:0227/205707.262662:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
-[11272:11272:0227/205707.388856:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yX/r/vKJE9-r0Lcb.js (158)
-[11272:11272:0227/205715.172252:WARNING:invalidation_listener_impl.cc(263)] ProfileInvalidationProvider-245350905893 Registration token: eV1qRRwBrcc:APA91bGuQpJojGsH0LrXSdTwlrsuZfEX9PE-NgnzI0cKhhkC16BopGng-xaOqtu2s0m6tPtOjV7NfUt5gJOgPsudT0pwSikdmqRpla54QLe4E0wLtwDBiRo
-[11272:11272:0227/205715.172323:ERROR:fm_registration_token_uploader.cc(186)] Client is missing for kUser scope
-[11272:11272:0227/205715.172364:WARNING:invalidation_listener_impl.cc(263)] ProfileInvalidationProvider-585406161706 Registration token: cHSo_xxV8H8:APA91bF3TjybHeZ8UAkzbFyP4CfIeWrs_F6PpSgI2j8hIr2fii8U_qDxxhDwnZS_ikbocwAj7FaIzRHaB-VkByXDyHbfiO6MkCo7ih11ok2OYPrgqInGUsE
-[11272:11272:0227/205715.172381:ERROR:fm_registration_token_uploader.cc(186)] Client is missing for kUser scope
-[11272:11302:0227/205715.616346:ERROR:registration_request.cc(291)] Registration response error message: DEPRECATED_ENDPOINT
-[11272:11302:0227/205736.384181:ERROR:registration_request.cc(291)] Registration response error message: DEPRECATED_ENDPOINT
-[11272:11272:0227/205743.975344:WARNING:zygote_communication_linux.cc(306)] Error reading message from zygote: Conexão fechada pela outra ponta (104)
-[11272:11272:0227/205743.982472:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
-[11272:11272:0227/205743.982522:WARNING:zygote_communication_linux.cc(308)] Socket closed prematurely.
-[11272:11272:0227/205743.985389:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
-[11272:11272:0227/205743.985441:WARNING:zygote_communication_linux.cc(308)] Socket closed prematurely.
-[11272:11272:0227/205743.990412:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
-[11272:11272:0227/205743.990471:WARNING:zygote_communication_linux.cc(308)] Socket closed prematurely.
-[11272:11302:0227/205744.000583:ERROR:connection_factory_impl.cc(483)] ConnectionHandler failed with net error: -2
-[11272:11272:0227/205744.006381:ERROR:network_service_instance_impl.cc(612)] Network service crashed, restarting service.
-[11272:11272:0227/205744.029217:ERROR:zygote_communication_linux.cc(296)] Failed to send GetTerminationStatus message to zygote
-[11272:11272:0227/205744.029290:WARNING:zygote_communication_linux.cc(308)] Socket closed prematurely.
-[11272:11272:0227/205744.036339:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.036381:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 1 time(s)
-[11272:11272:0227/205744.040404:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.040452:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 2 time(s)
-[11272:11272:0227/205744.044805:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.044870:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 3 time(s)
-[11272:11272:0227/205744.047770:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.047825:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 4 time(s)
-[11272:11318:0227/205744.047828:WARNING:backend_impl.cc(1757)] Destroying invalid entry.
-[11272:11272:0227/205744.050384:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.050431:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 5 time(s)
-[11272:11272:0227/205744.052449:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.052501:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 6 time(s)
-[11272:11272:0227/205744.054842:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.054889:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 7 time(s)
-[11272:11272:0227/205744.057076:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.057128:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 8 time(s)
-[11272:11318:0227/205744.057131:WARNING:backend_impl.cc(1757)] Destroying invalid entry.
-[11272:11272:0227/205744.059465:ERROR:gpu_process_host.cc(947)] GPU process launch failed: error_code=1002
-[11272:11272:0227/205744.059511:WARNING:gpu_process_host.cc(1384)] The GPU process has crashed 9 time(s)
-[11272:11272:0227/205744.059540:FATAL:gpu_data_manager_impl_private.cc(423)] GPU process isn't usable. Goodbye.
+[19232:19232:0228/002551.695770:INFO:chrome_browser_cloud_management_controller.cc(196)] No machine level policy manager exists.
+[19280:19280:0228/002551.830087:WARNING:sandbox_linux.cc(420)] InitializeSandbox() called with multiple threads in process gpu-process.
+[19280:19280:0228/002551.831073:WARNING:viz_main_impl.cc(85)] VizNullHypothesis is disabled (not a warning)
+[19232:19232:0228/002552.544239:INFO:CONSOLE(0)] "Error with Permissions-Policy header: Unrecognized feature: 'bluetooth'.", source:  (0)
+[19232:19232:0228/002552.616479:INFO:CONSOLE(158)] "Event handler of 'x-storagemutated-1' event must be added on the initial evaluation of worker script.", source: https://static.whatsapp.net/rsrc.php/v4/yX/r/vKJE9-r0Lcb.js (158)
+[19280:19280:0228/002557.496759:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 1 times!
+[19280:19280:0228/002557.497498:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 2 times!
+[19280:19280:0228/002559.806685:ERROR:gl_surface_presentation_helper.cc(260)] GetVSyncParametersIfAvailable() failed for 3 times!

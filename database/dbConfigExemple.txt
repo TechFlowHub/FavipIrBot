@@ -1,0 +1,20 @@
+import mysql.connector
+
+my_database = mysql.connector.connect(
+    host = "you localhost",
+    user = "you user",
+    password = "you password",
+    database = "chatbot_favip"
+)
+
+my_cursor = my_database.cursor()
+
+def getPhoneByPhone(phone):
+    my_cursor.execute("SELECT * FROM phones WHERE phone = %s", (phone,))  
+    data = my_cursor.fetchall()
+    return data
+
+def insertPhone(phone):
+    my_cursor.execute("INSERT INTO phones (phone) VALUES (%s)", (phone,))
+    my_database.commit()  
+    return "Telefone Cadastrado"

@@ -4,6 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from time import sleep
 
+from database import dbConfig
+
 class Bot:
     def __init__(self):
         chrome_options = Options()
@@ -16,6 +18,7 @@ class Bot:
         self.link = "https://web.whatsapp.com/"
         self.xpaths = {
             "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
+            "phone": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/header/div[2]/div[1]/div/div/span[1]"
         }
         self._class = {
             "input_chat": "selectable-text copyable-text x15bjb6t x1n2onr6",
@@ -32,6 +35,18 @@ class Bot:
         sleep(10)
         print("QR Code scanned. Keeping the session active...")
 
+    def savingPhoneInDatabase(self):
+        try:
+            phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
+            phone_number = phone_element.text
+            
+            dbConfig.insertPhone(phone_number)
+
+            return "Phone saved"
+        except Exception as e:
+            print(f"Error in saving phone in db: {e}")
+            return None
+
     def openUnread(self):
         try:
             unread_button = self.driver.find_element(By.XPATH, self.xpaths["unread"])
@@ -47,6 +62,7 @@ class Bot:
             unread_bubble.click()
             sleep(5)
             print("unread_bubble cliked")
+            self.savingPhoneInDatabase()
         except Exception as e:
             print(f"error in unread_bubble: {e}")
 
@@ -72,6 +88,7 @@ class Bot:
         except Exception as e:
             print(f"Error in getLastMessage: {e}")
             return None
+        
     def main(self):
         try:
             self.login()
