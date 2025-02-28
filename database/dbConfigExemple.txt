@@ -9,8 +9,8 @@ my_database = mysql.connector.connect(
 
 my_cursor = my_database.cursor()
 
-def getPhoneByPhone(phone):
-    my_cursor.execute("SELECT * FROM phones WHERE phone = %s", (phone,))  
+def getAllPhones():
+    my_cursor.execute("SELECT * FROM phones")  
     data = my_cursor.fetchall()
     return data
 
@@ -18,3 +18,8 @@ def insertPhone(phone):
     my_cursor.execute("INSERT INTO phones (phone) VALUES (%s)", (phone,))
     my_database.commit()  
     return "Telefone Cadastrado"
+
+def doesPhoneExist(phone): 
+    my_cursor.execute("SELECT * FROM phones WHERE phone = %s", (phone, ))
+    existing_phone = my_cursor.fetchone()  
+    return existing_phone
