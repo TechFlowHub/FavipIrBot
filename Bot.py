@@ -35,12 +35,20 @@ class Bot:
         sleep(10)
         print("QR Code scanned. Keeping the session active...")
 
+    #saving the phone number in a database to check whether it is the first call or not and the questions asked.
     def savingPhoneInDatabase(self):
         try:
             phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
             phone_number = phone_element.text
-            dbConfig.insertPhone(phone_number)
-            return "Phone saved"
+
+            existing_phone = dbConfig.doesPhoneExist(phone_number)
+
+            if existing_phone:
+                print("Phone already exists")
+            else:
+                dbConfig.insertPhone(phone_number)
+                print ("Phone saved")
+
         except Exception as e:
             print(f"Error in saving phone in db: {e}")
             return None
