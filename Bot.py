@@ -39,9 +39,7 @@ class Bot:
         try:
             phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
             phone_number = phone_element.text
-            
             dbConfig.insertPhone(phone_number)
-
             return "Phone saved"
         except Exception as e:
             print(f"Error in saving phone in db: {e}")
