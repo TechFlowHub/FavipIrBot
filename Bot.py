@@ -52,6 +52,14 @@ class Bot:
         except Exception as e:
             print(f"Error in saving phone in db: {e}")
             return None
+        
+
+    def phoneAlreadyExist(self):
+        return
+    
+
+    def phoneSaved(self):
+        return
 
     def openUnread(self):
         try:
