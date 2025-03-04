@@ -14,7 +14,7 @@ def sendMessege(browser, element, content):
     ''',
         element)
 
-def firstMessagePhoneNew(browser, input_box):
+def firstMessagePhoneNew(browser, input_box, body):
     messages = [
         "🟢 Olá! Seja bem-vindo(a) ao Assistente Virtual do Imposto de Renda! 📊💰",
         "",
@@ -28,9 +28,10 @@ def firstMessagePhoneNew(browser, input_box):
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
 
     input_box.send_keys(Keys.ENTER)
+    body.send_keys(Keys.ESCAPE)
 
 
-def firstMessagePhoneSaved(browser, input_box):
+def firstMessagePhoneSaved(browser, input_box, body):
     messages = [
         "🟡 E aí! Quanto tempo! 😃👋",
         "",
@@ -44,3 +45,4 @@ def firstMessagePhoneSaved(browser, input_box):
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
 
     input_box.send_keys(Keys.ENTER)
+    body.send_keys(Keys.ESCAPE)

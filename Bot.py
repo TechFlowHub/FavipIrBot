@@ -1,7 +1,9 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from time import sleep
 
 from database import dbConfig
@@ -20,7 +22,8 @@ class Bot:
         self.xpaths = {
             "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
             "phone": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/header/div[2]/div[1]/div/div/span[1]",
-            "input_box": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p"
+            "input_box": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p",
+            "body": "/html/body"
         }
         self._class = {
             "input_chat": "selectable-text copyable-text x15bjb6t x1n2onr6",
@@ -33,64 +36,95 @@ class Bot:
     def login(self):
         print("Bot Inicializado")
         self.driver.get(self.link)
-        print("Waiting for you to scan your QR code...")
-        sleep(10)
-        print("QR Code scanned. Keeping the session active...")
+        print("Aguardando login via QR Code...")
 
-    #saving the phone number in a database to check whether it is the first call or not and the questions asked.
+        try:
+            WebDriverWait(self.driver, 60).until(
+                EC.presence_of_element_located((By.XPATH, self.xpaths["unread"]))
+            )
+            print("Login detectado! Continuando...")
+        except TimeoutException:
+            print("Tempo limite atingido. Certifique-se de escanear o QR Code a tempo.")
+            self.driver.quit()
+
     def savingPhoneInDatabase(self):
         try:
-            phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
-            phone_number = phone_element.text
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, self.xpaths["phone"]))
+            )
+
+            for _ in range(3):
+                try:
+                    phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
+                    phone_number = phone_element.text.strip()
+                    break
+                except StaleElementReferenceException:
+                    print("Elemento do telefone ficou obsoleto. Tentando novamente...")
+                    sleep(1)
+            else:
+                print("Falha ao capturar o telefone.")
+                return None
 
             existing_phone = dbConfig.doesPhoneExist(phone_number)
 
             if existing_phone:
-                print("Phone already exists")
+                print("Telefone já existe no banco.")
                 self.phoneAlreadyExist()
             else:
                 dbConfig.insertPhone(phone_number)
-                print ("Phone saved")
+                print("Telefone salvo no banco.")
                 self.phoneSaved()
 
         except Exception as e:
-            print(f"Error in saving phone in db: {e}")
+            print(f"Erro ao salvar telefone no banco: {e}")
             return None
         
     def phoneAlreadyExist(self):
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-        Menus.firstMessagePhoneSaved(self.driver, input_box)
+        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+        
+        Menus.firstMessagePhoneSaved(self.driver, input_box, body)
     
     def phoneSaved(self):
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-        Menus.firstMessagePhoneNew(self.driver, input_box)
+        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+
+        Menus.firstMessagePhoneNew(self.driver, input_box, body)
 
     def openUnread(self):
         try:
-            unread_button = self.driver.find_element(By.XPATH, self.xpaths["unread"])
+            unread_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, self.xpaths["unread"]))
+            )
             unread_button.click()
-            sleep(5)
-            print("Unread message opened.")
+            sleep(2) 
+            print("Mensagem não lida aberta.")
+        except TimeoutException:
+            print("Nenhuma mensagem não lida encontrada.")
         except Exception as e:
-            print(f"Error in openUnread: {e}")
-    
+            print(f"Erro em openUnread: {e}")
+
     def openUnreadMessage(self):
         try:
-            unread_bubble = self.driver.find_element(By.CLASS_NAME, self._class["unread_bubble"])
+            unread_bubble = WebDriverWait(self.driver, 30).until(
+                EC.element_to_be_clickable((By.CLASS_NAME, self._class["unread_bubble"]))
+            )
             unread_bubble.click()
-            sleep(5)
-            print("unread_bubble cliked")
+            sleep(3) 
+            print("Mensagem não lida clicada.")
             self.savingPhoneInDatabase()
+        except TimeoutException:
+            print("Nenhuma nova mensagem não lida foi encontrada.")
         except Exception as e:
-            print(f"error in unread_bubble: {e}")
+            print(f"Erro em openUnreadMessage: {e}")
 
-    def sendMenssage(self):
+    def sendMessage(self):
         try:
             sendMessage_v = self.driver.find_element(By.CLASS_NAME, self._class["input_chat"])
             sendMessage_v.click()
-            print("menssage sent")
+            print("Mensagem enviada.")
         except Exception as e:
-            print(f"error in sendMessage: {e}")
+            print(f"Erro em sendMessage: {e}")
     
     def readLastMessage(self):
         try:
@@ -98,23 +132,23 @@ class Bot:
             if readLastMessage_v:
                 last_element = readLastMessage_v[-1]
                 last_text = last_element.text
-                print(f"Last message: {last_text}")
+                print(f"Última mensagem: {last_text}")
                 return last_text
             else:
-                print("No elements found with the specified class.")
+                print("Nenhuma mensagem encontrada.")
                 return None
         except Exception as e:
-            print(f"Error in getLastMessage: {e}")
+            print(f"Erro em readLastMessage: {e}")
             return None
         
     def main(self):
         try:
             self.login()
             self.openUnread()
-            self.openUnreadMessage()
-            self.readLastMessage()
+
             while True:
-                sleep(10)
+                self.openUnreadMessage()
+                sleep(2)
         except KeyboardInterrupt:
             print("Bot encerrado manualmente.")
         finally:
