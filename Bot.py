@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from time import sleep
 
 from database import dbConfig
+import Menus
 
 class Bot:
     def __init__(self):
@@ -18,7 +19,8 @@ class Bot:
         self.link = "https://web.whatsapp.com/"
         self.xpaths = {
             "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
-            "phone": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/header/div[2]/div[1]/div/div/span[1]"
+            "phone": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/header/div[2]/div[1]/div/div/span[1]",
+            "input_box": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p"
         }
         self._class = {
             "input_chat": "selectable-text copyable-text x15bjb6t x1n2onr6",
@@ -45,21 +47,23 @@ class Bot:
 
             if existing_phone:
                 print("Phone already exists")
+                self.phoneAlreadyExist()
             else:
                 dbConfig.insertPhone(phone_number)
                 print ("Phone saved")
+                self.phoneSaved()
 
         except Exception as e:
             print(f"Error in saving phone in db: {e}")
             return None
         
-
     def phoneAlreadyExist(self):
-        return
+        input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+        Menus.firstMessagePhoneSaved(self.driver, input_box)
     
-
     def phoneSaved(self):
-        return
+        input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+        Menus.firstMessagePhoneNew(self.driver, input_box)
 
     def openUnread(self):
         try:

@@ -1,4 +1,4 @@
 venv/
 profile/
 database/dbConfig.py
-database/__pycache__/
+__pycache__
