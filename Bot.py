@@ -106,12 +106,12 @@ class Bot:
 
     def openUnreadMessage(self):
         try:
-            unread_bubble = WebDriverWait(self.driver, 30).until(
+            unread_bubble = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable((By.CLASS_NAME, self._class["unread_bubble"]))
             )
             unread_bubble.click()
             sleep(3) 
-            print("Mensagem não lida clicada.")
+            print("Mensagens não lida clicada.")
             self.savingPhoneInDatabase()
         except TimeoutException:
             print("Nenhuma nova mensagem não lida foi encontrada.")

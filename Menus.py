@@ -1,4 +1,7 @@
 from selenium.webdriver.common.keys import Keys
+import Questions
+import time
+from selenium.webdriver.common.by import By
 
 def sendMessege(browser, element, content):
     browser.execute_script(
@@ -26,8 +29,15 @@ def firstMessagePhoneNew(browser, input_box, body):
     for message in messages:
         sendMessege(browser, input_box, message)
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+        time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
+    time.sleep(1)
+
+    # Pegando novamente o input box antes de chamar Questions.questions
+    input_box = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p")
+    Questions.questions(browser, input_box)
+    
     body.send_keys(Keys.ESCAPE)
 
 
@@ -43,6 +53,13 @@ def firstMessagePhoneSaved(browser, input_box, body):
     for message in messages:
         sendMessege(browser, input_box, message)
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+        time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
+    time.sleep(1)
+
+    # Pegando novamente o input box antes de chamar Questions.questions
+    input_box = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p")
+    Questions.questions(browser, input_box)
+
     body.send_keys(Keys.ESCAPE)
