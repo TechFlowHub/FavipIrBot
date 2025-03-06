@@ -1,9 +1,9 @@
 import mysql.connector
 
 my_database = mysql.connector.connect(
-    host = "you localhost",
-    user = "you user",
-    password = "you password",
+    host = "your_host",
+    user = "your_user",
+    password = "your_password",
     database = "chatbot_favip"
 )
 
@@ -22,4 +22,26 @@ def insertPhone(phone):
 def doesPhoneExist(phone): 
     my_cursor.execute("SELECT * FROM phones WHERE phone = %s", (phone, ))
     existing_phone = my_cursor.fetchone()  
+    return existing_phone
+
+def insertPhoneToCurrentService(phone):
+    my_cursor.execute("INSERT INTO current_service (phone) VALUES (%s)", (phone,))
+    my_database.commit()
+    return "Telefone inserido no current_service"
+
+def deletePhoneFromCurrentService(phone):
+    my_cursor.execute("DELETE FROM current_service WHERE phone = %s", (phone,))
+    my_database.commit()
+    if my_cursor.rowcount > 0:
+        return f"Telefone {phone} removido do current_service"
+    else:
+        return "Telefone não encontrado no current_service"
+
+def getAllPhonesFromCurrentService():
+    my_cursor.execute("SELECT phone FROM current_service")  
+    data = my_cursor.fetchall()
+    return [phone[0] for phone in data]
+def doesPhoneExistInCurrentService(phone):
+    my_cursor.execute("SELECT * FROM current_service WHERE phone = %s", (phone,))
+    existing_phone = my_cursor.fetchone()
     return existing_phone
