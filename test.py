@@ -1,9 +1,13 @@
 from database import dbConfig
 
-# Inserir telefone na tabela phones
-result = dbConfig.insertPhone('81989945697')
+result = dbConfig.insertPhone('k9083091')
 print(result)
 
-# Inserir telefone na tabela current_service
-result_current_service = dbConfig.insertPhoneToCurrentService('81989945697')
+result_current_service = dbConfig.insertPhoneToCurrentService('23262i3091i025')
 print(result_current_service)
+
+get = dbConfig.getAllPhonesFromCurrentService()
+print(get)
+
+delete_result = dbConfig.deletePhoneFromCurrentService('123')
+print(delete_result)

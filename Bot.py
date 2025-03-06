@@ -4,10 +4,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 from database import dbConfig
 import Menus
+import Questions
 
 class Bot:
     def __init__(self):
@@ -112,19 +114,10 @@ class Bot:
             unread_bubble.click()
             sleep(3) 
             print("Mensagens não lida clicada.")
-            self.savingPhoneInDatabase()
         except TimeoutException:
             print("Nenhuma nova mensagem não lida foi encontrada.")
         except Exception as e:
             print(f"Erro em openUnreadMessage: {e}")
-
-    def sendMessage(self):
-        try:
-            sendMessage_v = self.driver.find_element(By.CLASS_NAME, self._class["input_chat"])
-            sendMessage_v.click()
-            print("Mensagem enviada.")
-        except Exception as e:
-            print(f"Erro em sendMessage: {e}")
     
     def readLastMessage(self):
         try:
@@ -140,7 +133,48 @@ class Bot:
         except Exception as e:
             print(f"Erro em readLastMessage: {e}")
             return None
+
+    def saveCurrentServicePhone(self):
+       pass
+
+    def endService(self):
+        pass
+
+    def verifyCurrentServiceList(self):
+        pass
+
+    def currentService(self):
+        pass
+    def sendResponse(self, last_text):
+        questions = Questions
+        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+        input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+        if last_text == "1":
+            questions.respQuestOne(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "2":
+            questions.respQuestTwo(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "3":
+            questions.respQuestThree(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "4":
+            questions.respQuestFour(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "5":
+            questions.respQuestFive(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "6":
+            questions.respQuestSix(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "7":
+            questions.respQuestSeven(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "8":
+            questions.respQuestEight(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
         
+
     def main(self):
         try:
             self.login()
@@ -148,6 +182,12 @@ class Bot:
 
             while True:
                 self.openUnreadMessage()
+                last_text = self.readLastMessage()
+                if last_text:
+                    self.sendResponse(last_text)
+                else:
+                    print("nenhuma nova mensagem para responder")
+
                 sleep(2)
         except KeyboardInterrupt:
             print("Bot encerrado manualmente.")
