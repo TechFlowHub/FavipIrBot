@@ -41,6 +41,7 @@ def getAllPhonesFromCurrentService():
     my_cursor.execute("SELECT phone FROM current_service")  
     data = my_cursor.fetchall()
     return [phone[0] for phone in data]
+
 def doesPhoneExistInCurrentService(phone):
     my_cursor.execute("SELECT * FROM current_service WHERE phone = %s", (phone,))
     existing_phone = my_cursor.fetchone()

@@ -145,36 +145,27 @@ class Bot:
 
     def currentService(self):
         pass
+    
     def sendResponse(self, last_text):
         questions = Questions
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-        if last_text == "1":
-            questions.respQuestOne(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "2":
-            questions.respQuestTwo(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "3":
-            questions.respQuestThree(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "4":
-            questions.respQuestFour(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "5":
-            questions.respQuestFive(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "6":
-            questions.respQuestSix(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "7":
-            questions.respQuestSeven(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "8":
-            questions.respQuestEight(self.driver, input_box)
+        
+        question_map = {
+            "1": questions.respQuestOne,
+            "2": questions.respQuestTwo,
+            "3": questions.respQuestThree,
+            "4": questions.respQuestFour,
+            "5": questions.respQuestFive,
+            "6": questions.respQuestSix,
+            "7": questions.respQuestSeven,
+            "8": questions.respQuestEight
+        }
+
+        if last_text in question_map:
+            question_map[last_text](self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
         
-
     def main(self):
         try:
             self.login()
