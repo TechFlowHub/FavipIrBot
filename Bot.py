@@ -133,8 +133,7 @@ class Bot:
         except Exception as e:
             print(f"Erro em readLastMessage: {e}")
             return None
-
-    def saveCurrentServicePhone(self):
+    def getPhoneNumber(self):
         try:
             WebDriverWait(self.driver, 10).until(
                 EC.presence_of_element_located((By.XPATH, self.xpaths["phone"]))
@@ -142,21 +141,34 @@ class Bot:
             for _ in range(3):
                 try:
                     phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
-                    print(phone_element.text)
-                    dbConfig.insertPhoneToCurrentService(phone_element.text)
+                    return phone_element.text
                 except:
-                    print("nao foi possivel pegar o telefone")
+                    print("não foi possivel conseguir o numero de telefone")
+                    
         except:
-            pass
-    def endService(self):
-        pass
+            print("algo deu errado")
 
-    def verifyCurrentServiceList(self):
-        pass
+    def endService(self, phone_number):
+        dbConfig.deletePhoneFromCurrentService(phone_number)
 
-    def currentService(self):
-        pass
-    
+    def verifyCurrentServiceList(self, phone_number):
+        if dbConfig.doesPhoneExistInCurrentService(phone_number):
+            return True
+        else:
+            return False
+    def saveCurrentServicePhone(self, phone_number):
+        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+        input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+        if self.verifyCurrentServiceList(phone_number):
+            return False
+        elif self.verifyCurrentServiceList(phone_number) == False:
+            dbConfig.insertPhoneToCurrentService(phone_number)
+            Questions.questions(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+            return True
+            
+ 
+
     def sendResponse(self, last_text):
         questions = Questions
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
@@ -171,11 +183,16 @@ class Bot:
             "6": questions.respQuestSix,
             "7": questions.respQuestSeven,
             "8": questions.respQuestEight
+            
         }
 
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
+
+    def currentService(self):
+        pass
+    
         
     def main(self):
         try:
@@ -184,7 +201,9 @@ class Bot:
 
             while True:
                 self.openUnreadMessage()
-                self.saveCurrentServicePhone()
+                number = self.getPhoneNumber()
+                print(number)
+                self.saveCurrentServicePhone(number)
                 last_text = self.readLastMessage()
                 if last_text:
                     self.sendResponse(last_text)
