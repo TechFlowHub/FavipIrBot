@@ -135,8 +135,19 @@ class Bot:
             return None
 
     def saveCurrentServicePhone(self):
-       pass
-
+        try:
+            WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, self.xpaths["phone"]))
+            )
+            for _ in range(3):
+                try:
+                    phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
+                    print(phone_element.text)
+                    dbConfig.insertPhoneToCurrentService(phone_element.text)
+                except:
+                    print("nao foi possivel pegar o telefone")
+        except:
+            pass
     def endService(self):
         pass
 
@@ -173,6 +184,7 @@ class Bot:
 
             while True:
                 self.openUnreadMessage()
+                self.saveCurrentServicePhone()
                 last_text = self.readLastMessage()
                 if last_text:
                     self.sendResponse(last_text)
