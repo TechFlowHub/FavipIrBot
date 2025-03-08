@@ -19,7 +19,7 @@ def questions(browser, input_box):
         "",
         "8 - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
-        "9 - 🛑 Para finalizar atendimento",
+        "9 - 👋 Para finalizar atendimento"
         "",
         "0 - 🤔 Outra pergunta:"
     ]
@@ -240,9 +240,11 @@ def respQuestEight(browser, input_box):
 
 def respQuestNine(browser, input_box):
     messages = [
-        "Atendimento encerrado, volte sempre"
+        "📴 Atendimento encerrado, volte sempre! 😊",
         "",
-        "Lembre-se para um atedimento fisico você pode ir ate a favip"
+        "📍 Lembre-se: para um atendimento físico, você pode ir até a FAVIP! 🏢",
+        "ℹ️ Na FAVIP, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
+        "📍 Endereço da unidade: Av. Adjar da Silva Casé, 800 - Indianópolis, 55.024-740 Caruaru, PE · Brasil. 🏢"
     ]
 
     for message in messages:
