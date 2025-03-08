@@ -171,7 +171,7 @@ class Bot:
             
  
 
-    def sendResponse(self, last_text):
+    def sendResponse(self, last_text, phone):
         questions = Questions
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
@@ -184,21 +184,21 @@ class Bot:
             "5": questions.respQuestFive,
             "6": questions.respQuestSix,
             "7": questions.respQuestSeven,
-            "8": questions.respQuestEight
-            
+            "8": questions.respQuestEight,
         }
 
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
+        elif last_text == "9":
+            self.endService(phone)
+            questions.respQuestNine(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
         else:
             print("digite algo valido")
             body.send_keys(Keys.ESCAPE)
 
-    def currentService(self):
-        pass
-    
-        
+  
     def main(self):
         try:
             self.login()
@@ -209,12 +209,17 @@ class Bot:
                 if message:
                     number = self.getPhoneNumber()
                     print(number)
+                    verify = self.verifyCurrentServiceList(number)
+                    if verify:
+                        print("numero ja esta salvo na lista de atendimentos")
+                    elif verify != True:
+                        print("numero nao está salvo na lista de atendimentos")
                     self.saveCurrentServicePhone(number)
                     last_text = self.readLastMessage()
                 elif message != True:
                     continue
                 if last_text:
-                    self.sendResponse(last_text)
+                    self.sendResponse(last_text, number)
                 else:
                     print("nenhuma nova mensagem para responder")
 

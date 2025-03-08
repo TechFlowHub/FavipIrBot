@@ -19,6 +19,8 @@ def questions(browser, input_box):
         "",
         "8 - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
+        "9 - 🛑 Para finalizar atendimento",
+        "",
         "0 - 🤔 Outra pergunta:"
     ]
 
@@ -227,6 +229,20 @@ def respQuestEight(browser, input_box):
         "4️⃣ Se for financiado, detalhe o saldo devedor e os valores pagos no ano. 🏦",
         "",
         "❗ *Imóveis alugados também devem ser informados, assim como a renda gerada!* Se houve valorização e venda com lucro, pode haver tributação sobre ganho de capital. 💰📊"
+    ]
+
+    for message in messages:
+        Menus.sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+
+
+def respQuestNine(browser, input_box):
+    messages = [
+        "Atendimento encerrado, volte sempre"
+        "",
+        "Lembre-se para um atedimento fisico você pode ir ate a favip"
     ]
 
     for message in messages:
