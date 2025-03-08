@@ -114,6 +114,7 @@ class Bot:
             unread_bubble.click()
             sleep(3) 
             print("Mensagens não lida clicada.")
+            return True
         except TimeoutException:
             print("Nenhuma nova mensagem não lida foi encontrada.")
         except Exception as e:
@@ -144,6 +145,7 @@ class Bot:
                     return phone_element.text
                 except:
                     print("não foi possivel conseguir o numero de telefone")
+                    pass
                     
         except:
             print("algo deu errado")
@@ -189,6 +191,9 @@ class Bot:
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
+        else:
+            print("digite algo valido")
+            body.send_keys(Keys.ESCAPE)
 
     def currentService(self):
         pass
@@ -200,11 +205,14 @@ class Bot:
             self.openUnread()
 
             while True:
-                self.openUnreadMessage()
-                number = self.getPhoneNumber()
-                print(number)
-                self.saveCurrentServicePhone(number)
-                last_text = self.readLastMessage()
+                message = self.openUnreadMessage()
+                if message:
+                    number = self.getPhoneNumber()
+                    print(number)
+                    self.saveCurrentServicePhone(number)
+                    last_text = self.readLastMessage()
+                elif message != True:
+                    continue
                 if last_text:
                     self.sendResponse(last_text)
                 else:
