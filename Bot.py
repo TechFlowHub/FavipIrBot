@@ -6,11 +6,53 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+import requests
 
 from database import dbConfig
 import Menus
 import Questions
 
+
+import requests
+
+def sendResponseWithChatGpt(last_text):
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": "Bearer your_token",
+        "Content-Type": "application/json"
+    }
+    calibration_prompts = [
+        {
+            "role": "system",
+            "content": (
+                "Você é um bot especializado em contabilidade. Responda apenas perguntas relacionadas a contabilidade. "
+                "Se a pergunta não estiver dentro deste escopo, responda com: "
+                "'Sou um bot auxiliar de contabilidade. Me pergunte apenas coisas do meu escopo.'"
+            )
+        }
+    ]
+    
+    user_message = {
+        "role": "user",
+        "content": last_text
+    }
+
+    payload = {
+        "model": "llama-3.3-70b-versatile",
+        "messages": calibration_prompts + [user_message]
+    }
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response_data = response.json()
+
+        if "choices" in response_data and len(response_data["choices"]) > 0:
+            return response_data["choices"][0]["message"]["content"]
+        else:
+            return "Não foi possível processar a resposta."
+    except requests.exceptions.RequestException as e:
+        return f"Erro ao fazer a requisição: {e}"
+
+    
 class Bot:
     def __init__(self):
         chrome_options = Options()
@@ -168,9 +210,9 @@ class Bot:
             Questions.questions(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
             return True
-            
- 
 
+
+    
     def sendResponse(self, last_text, phone):
         questions = Questions
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
@@ -194,6 +236,9 @@ class Bot:
             self.endService(phone)
             questions.respQuestNine(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
+        elif last_text == "0":
+            questions.respQuestZero(self.driver, input_box)
+
         else:
             print("digite algo valido")
             body.send_keys(Keys.ESCAPE)
