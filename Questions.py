@@ -19,7 +19,7 @@ def questions(browser, input_box):
         "",
         "8 - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
-        "9 - 👋 Para finalizar atendimento"
+        "9 - 👋 Para finalizar atendimento",
         "",
         "0 - 🤔 Outra pergunta:"
     ]

@@ -32,13 +32,6 @@ def firstMessagePhoneNew(browser, input_box, body):
         time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
-    time.sleep(1)
-
-    # Pegando novamente o input box antes de chamar Questions.questions
-    input_box = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p")
-    Questions.questions(browser, input_box)
-    
-    body.send_keys(Keys.ESCAPE)
 
 
 def firstMessagePhoneSaved(browser, input_box, body):
@@ -56,10 +49,6 @@ def firstMessagePhoneSaved(browser, input_box, body):
         time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
-    time.sleep(1)
+    time.sleep(0.3)
 
-    # Pegando novamente o input box antes de chamar Questions.questions
-    input_box = browser.find_element(By.XPATH, "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p")
-    Questions.questions(browser, input_box)
-
-    body.send_keys(Keys.ESCAPE)
+    input_box.send_keys(Keys.ENTER)

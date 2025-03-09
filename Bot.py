@@ -128,12 +128,18 @@ class Bot:
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
         
         Menus.firstMessagePhoneSaved(self.driver, input_box, body)
-    
-    def phoneSaved(self):
-        input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
 
-        Menus.firstMessagePhoneNew(self.driver, input_box, body)
+    def phoneSaved(self):
+        try:
+            input_box = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, self.xpaths["input_box"]))
+            )
+            body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+
+            Menus.firstMessagePhoneNew(self.driver, input_box, body)
+        except TimeoutException:
+            print("Erro: Campo de entrada de mensagem não encontrado.")
+
 
     def openUnread(self):
         try:
@@ -200,6 +206,7 @@ class Bot:
             return True
         else:
             return False
+      
     def saveCurrentServicePhone(self, phone_number):
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
@@ -210,8 +217,6 @@ class Bot:
             Questions.questions(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
             return True
-
-
     
     def sendResponse(self, last_text, phone):
         questions = Questions
@@ -238,12 +243,10 @@ class Bot:
             body.send_keys(Keys.ESCAPE)
         elif last_text == "0":
             questions.respQuestZero(self.driver, input_box)
-
         else:
             print("digite algo valido")
             body.send_keys(Keys.ESCAPE)
 
-  
     def main(self):
         try:
             self.login()
@@ -254,11 +257,14 @@ class Bot:
                 if message:
                     number = self.getPhoneNumber()
                     print(number)
-                    verify = self.verifyCurrentServiceList(number)
+                    verify = self.verifyCurrentServiceList(number)  
+
                     if verify:
                         print("numero ja esta salvo na lista de atendimentos")
                     elif verify != True:
                         print("numero nao está salvo na lista de atendimentos")
+                        self.savingPhoneInDatabase()
+                    
                     self.saveCurrentServicePhone(number)
                     last_text = self.readLastMessage()
                 elif message != True:
