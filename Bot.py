@@ -237,12 +237,12 @@ class Bot:
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
-        elif last_text == "9":
-            self.endService(phone)
-            questions.respQuestNine(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
         elif last_text == "0":
+            self.endService(phone)
             questions.respQuestZero(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "9":
+            questions.respQuestNine(self.driver, input_box)
         else:
             print("digite algo valido")
             body.send_keys(Keys.ESCAPE)

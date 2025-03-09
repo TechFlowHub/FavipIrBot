@@ -19,9 +19,9 @@ def questions(browser, input_box):
         "",
         "8 - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
-        "9 - 👋 Para finalizar atendimento",
+        "9 - 🤔 Outra pergunta:",
         "",
-        "0 - 🤔 Outra pergunta:"
+        "0 - 👋 Para finalizar atendimento"
     ]
 
     for message in messages:
@@ -238,7 +238,7 @@ def respQuestEight(browser, input_box):
     input_box.send_keys(Keys.ENTER)
 
 
-def respQuestNine(browser, input_box):
+def respQuestZero(browser, input_box):
     messages = [
         "📴 Atendimento encerrado, volte sempre! 😊",
         "",
