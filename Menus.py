@@ -33,7 +33,6 @@ def firstMessagePhoneNew(browser, input_box, body):
 
     input_box.send_keys(Keys.ENTER)
 
-
 def firstMessagePhoneSaved(browser, input_box, body):
     messages = [
         "🟡 E aí! Quanto tempo! 😃👋",
@@ -49,6 +48,15 @@ def firstMessagePhoneSaved(browser, input_box, body):
         time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
-    time.sleep(0.3)
+
+def invalidNumber(browser, input_box):
+    messages = [
+        "⚠️ *Opção inválida!* Por favor, digite um número de *1 a 9* para escolher uma pergunta ou *0 para encerrar* o atendimento."
+    ]
+
+    for message in messages:
+        sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+        time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)

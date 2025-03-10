@@ -220,6 +220,7 @@ class Bot:
     
     def sendResponse(self, last_text, phone):
         questions = Questions
+        menus = Menus
         body = self.driver.find_element(By.XPATH, self.xpaths["body"])
         input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
         
@@ -236,6 +237,10 @@ class Bot:
 
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
+            
+            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+            questions.questionsSendMessage(self.driver, input_box)
+            
             body.send_keys(Keys.ESCAPE)
         elif last_text == "0":
             self.endService(phone)
@@ -244,7 +249,8 @@ class Bot:
         elif last_text == "9":
             questions.respQuestNine(self.driver, input_box)
         else:
-            print("digite algo valido")
+            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+            menus.invalidNumber(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
 
     def main(self):
