@@ -302,12 +302,27 @@ def respQuestNove(browser, input_box):
 
 def continueQuestion(browser, input_box):
     messages = [
-        "🌟 Gostaria de ver o painel de opções novamente?,"
+        "🌟 Gostaria de ver o painel de opções novamente?"
         "",
-        "❓ Digite [1] para SIM ou [2] para NÃO 👇😊"
+        "Digite [S] para *SIM*, [N] para *NÃO*, [F] para *FINALIZAR* o atendimento👇😊"
+    ]
 
     for message in messages:
         Menus.sendMessege(browser, input_box, message)
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
 
     input_box.send_keys(Keys.ENTER)
+
+def continueIa(browser, input_box):
+    messages = [
+        "👋 Quer sair? Digite [0] para *encerrar*"
+        "",
+        "Para continuar basta fazer mais perguntas.😊"
+    ]
+
+    for message in messages:
+        Menus.sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+

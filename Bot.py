@@ -81,6 +81,7 @@ class Bot:
             "unread_bubble": "_ahlk"
         }
         self.secondList = []
+        self.continueList = []
         
         self.main()
 
@@ -283,11 +284,24 @@ class Bot:
 
         if last_text in question_map:
             question_map[last_text](self.driver, input_box)
-            
+            self.continueList.append(phone)
             input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-            questions.questionsSendMessage(self.driver, input_box)
-            
+            questions.continueQuestion(self.driver, input_box)
+
             body.send_keys(Keys.ESCAPE)
+        elif phone in self.continueList and (last_text.upper() == "S" or last_text.upper() == "SIM"):
+            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+            questions.questions(self.driver, input_box)
+            body.send_keys(Keys.ESCAPE)
+            self.continueList.remove(phone)
+        elif phone in self.continueList and (last_text.upper() == "N" or last_text.upper() == "NÃO"):
+            body.send_keys(Keys.ESCAPE)
+            self.continueList.remove(phone)
+        elif phone in self.continueList and (last_text.upper() == "F" or last_text.upper() == "FINALIZAR"):
+            questions.respQuestZero(self.driver, input_box)
+            self.endService(phone)
+            body.send_keys(Keys.ESCAPE)
+            self.continueList.remove(phone)
         elif last_text == "9":
             questions.respQuestNove(self.driver, input_box)
             self.secondList.append(phone)
@@ -338,9 +352,7 @@ class Bot:
                     sleep(0.5)
                     input_box.send_keys(Keys.ENTER)
                     input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-                    Menus.sendMessege(self.driver, input_box, "digite 0 para sair")
-                    sleep(0.5)
-                    input_box.send_keys(Keys.ENTER)
+                    Questions.continueIa(self.driver, input_box)
                     
                     body.send_keys(Keys.ESCAPE)
                 
