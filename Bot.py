@@ -20,6 +20,9 @@ import pyzbar.pyzbar as pyzbar
 import numpy as np
 import qrcode_terminal
 
+import os
+import shutil
+
 def sendResponseWithChatGpt(last_text):
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
@@ -83,6 +86,7 @@ class Bot:
         self.main()
 
     def login(self):
+        self.deleteChromeHistory()
         print("Abrindo WhatsApp Web...")
         self.driver.get(self.link)
         try:
@@ -107,11 +111,9 @@ class Bot:
 
             # Recorta a área do QR Code
             qr_code_img = screenshot_img.crop((left, top, right, bottom))
-            print(qr_code_img)
 
             # Converte para numpy array para leitura
             qr_np = np.array(qr_code_img)
-            print(qr_np)
 
             # Decodifica o QR Code
             qr_code = pyzbar.decode(qr_np)
@@ -136,6 +138,19 @@ class Bot:
         except:
             print("Tempo limite atingido. Certifique-se de escanear o QR Code a tempo.")
             self.driver.quit()
+
+    def deleteChromeHistory():
+        history_file = os.path.expanduser("~/.config/google-chrome/Default/History")
+        
+        if os.path.exists(history_file):
+            os.remove(history_file)
+            
+            cache_dir = os.path.expanduser("~/.config/google-chrome/Default")
+            shutil.rmtree(cache_dir, ignore_errors=True)
+            
+            print("History Deleted")
+        else:
+            print("History not found")
 
     def savingPhoneInDatabase(self):
         try:
