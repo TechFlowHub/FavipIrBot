@@ -5,6 +5,8 @@ def questions(browser, input_box):
     messages = [
         "📢 Escolha uma opção! Digite um número de *1 a 9* para sua dúvida ou *0 para encerrar* o atendimento.",
         "",
+        "*🚀 Digite 9 para fazer perguntas e conversar com nossa Inteligência Artificial! 🤖💬*",
+        "",
         "*1* - 💰 Quem deve declarar o Imposto de Renda em 2025",
         "",
         "*2* - 🛑 Quem NÃO precisa declarar o Imposto de Renda em 2025?",
@@ -20,8 +22,6 @@ def questions(browser, input_box):
         "*7* - 📝 Como declarar o Imposto de Renda?",
         "",
         "*8* - 🏠 Tenho mais de uma casa, preciso declarar todas?",
-        "",
-        "*9* - 🤔 Outra pergunta:",
         "",
         "*0* - 👋 Para finalizar atendimento"
     ]
@@ -52,7 +52,7 @@ def questionsSendMessage(browser, input_box):
         "",
         "*8* - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
-        "*9* - 🤔 Outra pergunta:",
+        "*9* - *🚀 USE NOSSA IA! 🤖✨*",
         "",
         "*0* - 👋 Para finalizar atendimento"
     ]
@@ -275,10 +275,36 @@ def respQuestZero(browser, input_box):
     messages = [
         "📴 Atendimento encerrado, volte sempre! 😊",
         "",
-        "📍 Lembre-se: para um atendimento físico, você pode ir até a FAVIP! 🏢",
-        "ℹ️ Na FAVIP, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
+        "📍 Lembre-se: para um atendimento físico, você pode ir até a UniFAVIP! 🏢",
+        "ℹ️ Na UniFAVIP Wyden, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
         "📍 Endereço da unidade: Av. Adjar da Silva Casé, 800 - Indianópolis, 55.024-740 Caruaru, PE · Brasil. 🏢"
     ]
+
+    for message in messages:
+        Menus.sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+
+
+def respQuestNove(browser, input_box):
+    messages = [
+        "🌟 Nossa IA está pronta para analisar! 🤖✨",
+        "",
+        "❓ Manda uma pergunta aí! 👇😊"
+    ]
+
+    for message in messages:
+        Menus.sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+
+def continueQuestion(browser, input_box):
+    messages = [
+        "🌟 Gostaria de ver o painel de opções novamente?,"
+        "",
+        "❓ Digite [1] para SIM ou [2] para NÃO 👇😊"
 
     for message in messages:
         Menus.sendMessege(browser, input_box, message)

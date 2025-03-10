@@ -20,13 +20,10 @@ import pyzbar.pyzbar as pyzbar
 import numpy as np
 import qrcode_terminal
 
-import os
-import shutil
-
 def sendResponseWithChatGpt(last_text):
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {
-        "Authorization": "Bearer your_token",
+        "Authorization": "Bearer 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",
         "Content-Type": "application/json"
     }
     calibration_prompts = [
@@ -36,6 +33,7 @@ def sendResponseWithChatGpt(last_text):
                 "Você é um bot especializado em contabilidade. Responda apenas perguntas relacionadas a contabilidade. "
                 "Se a pergunta não estiver dentro deste escopo, responda com: "
                 "'Sou um bot auxiliar de contabilidade. Me pergunte apenas coisas do meu escopo.'"
+                "lembre-se que todas as perguntas são relacionadas ao país BRASIL, responda sempre em português brasileiro, tente ser o maximo possivel amigavel para leigos no assunto e use emojis com moderação"
             )
         }
     ]
@@ -82,11 +80,11 @@ class Bot:
             "last_message": "_akbu",
             "unread_bubble": "_ahlk"
         }
+        self.secondList = []
         
         self.main()
 
     def login(self):
-        self.deleteChromeHistory()
         print("Abrindo WhatsApp Web...")
         self.driver.get(self.link)
         try:
@@ -138,19 +136,6 @@ class Bot:
         except:
             print("Tempo limite atingido. Certifique-se de escanear o QR Code a tempo.")
             self.driver.quit()
-
-    def deleteChromeHistory():
-        history_file = os.path.expanduser("~/.config/google-chrome/Default/History")
-        
-        if os.path.exists(history_file):
-            os.remove(history_file)
-            
-            cache_dir = os.path.expanduser("~/.config/google-chrome/Default")
-            shutil.rmtree(cache_dir, ignore_errors=True)
-            
-            print("History Deleted")
-        else:
-            print("History not found")
 
     def savingPhoneInDatabase(self):
         try:
@@ -303,15 +288,20 @@ class Bot:
             questions.questionsSendMessage(self.driver, input_box)
             
             body.send_keys(Keys.ESCAPE)
-        elif last_text == "0":
-            self.endService(phone)
-            questions.respQuestZero(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
         elif last_text == "9":
-            questions.respQuestNine(self.driver, input_box)
+            questions.respQuestNove(self.driver, input_box)
+            self.secondList.append(phone)
+            print(f"Usuário adicionado na lista: {self.secondList}")
+            body.send_keys(Keys.ESCAPE)
+        elif last_text == "0":
+            questions.respQuestZero(self.driver, input_box)
+            self.endService(phone)
+            body.send_keys(Keys.ESCAPE)
         else:
             input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
             menus.invalidNumber(self.driver, input_box)
+            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+            Questions.questions(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
 
     def main(self):
@@ -336,8 +326,33 @@ class Bot:
                     last_text = self.readLastMessage()
                 elif message != True:
                     continue
-                if last_text:
+                if last_text and number not in self.secondList:
                     self.sendResponse(last_text, number)
+                elif number in self.secondList and last_text != "0":
+                    body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+                    input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+                    last_textIa = self.readLastMessage()
+                    print(sendResponseWithChatGpt(last_textIa))
+                    content = sendResponseWithChatGpt(last_textIa)
+                    Menus.sendMessege(self.driver, input_box, content)
+                    sleep(0.5)
+                    input_box.send_keys(Keys.ENTER)
+                    input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+                    Menus.sendMessege(self.driver, input_box, "digite 0 para sair")
+                    sleep(0.5)
+                    input_box.send_keys(Keys.ENTER)
+                    
+                    body.send_keys(Keys.ESCAPE)
+                
+                elif last_text == "0":
+                    self.secondList.remove(number)
+                    input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+                    Menus.sendMessege(self.driver, input_box, "Obrigado por usar nossa IA fique avontade para escolher qualquer outra opção")
+                    input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+                    input_box.send_keys(Keys.ENTER)
+                    input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
+                    Questions.questions(self.driver, input_box)
+
                 else:
                     print("nenhuma nova mensagem para responder")
 
