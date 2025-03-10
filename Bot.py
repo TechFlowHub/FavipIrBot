@@ -115,6 +115,7 @@ class Bot:
 
             # Decodifica o QR Code
             qr_code = pyzbar.decode(qr_np)
+            print(qr_code)
           
             if qr_code:
                 qr_text = qr_code[0].data.decode("utf-8")
