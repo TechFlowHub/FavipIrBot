@@ -12,8 +12,13 @@ from database import dbConfig
 import Menus
 import Questions
 
-
 import requests
+
+from io import BytesIO
+from PIL import Image
+import pyzbar.pyzbar as pyzbar
+import numpy as np
+import qrcode_terminal
 
 def sendResponseWithChatGpt(last_text):
     url = "https://api.groq.com/openai/v1/chat/completions"
@@ -78,16 +83,57 @@ class Bot:
         self.main()
 
     def login(self):
-        print("Bot Inicializado")
+        print("Abrindo WhatsApp Web...")
         self.driver.get(self.link)
-        print("Aguardando login via QR Code...")
+        try:
+            # Espera até que o elemento do QR Code (canvas) seja carregado
+            WebDriverWait(self.driver, 30).until(
+                EC.presence_of_element_located((By.TAG_NAME, "canvas"))
+            )
+
+            # Captura a tela como imagem
+            screenshot = self.driver.get_screenshot_as_png()
+            screenshot_img = Image.open(BytesIO(screenshot))
+
+            # Localiza o elemento do QR Code (canvas)
+            qr_element = self.driver.find_element(By.TAG_NAME, "canvas")
+            location = qr_element.location
+            size = qr_element.size
+
+            left = location['x']
+            top = location['y']
+            right = left + size['width']
+            bottom = top + size['height']
+
+            # Recorta a área do QR Code
+            qr_code_img = screenshot_img.crop((left, top, right, bottom))
+            print(qr_code_img)
+
+            # Converte para numpy array para leitura
+            qr_np = np.array(qr_code_img)
+            print(qr_np)
+
+            # Decodifica o QR Code
+            qr_code = pyzbar.decode(qr_np)
+          
+            if qr_code:
+                qr_text = qr_code[0].data.decode("utf-8")
+                print("QR Code detectado!")
+
+                # Exibir QR Code no terminal
+                qrcode_terminal.draw(qr_text)
+            else:
+                print("Erro: QR Code não detectado.")
+
+        except Exception as e:
+            print(f"Erro ao capturar o QR Code: {e}")
 
         try:
             WebDriverWait(self.driver, 60).until(
                 EC.presence_of_element_located((By.XPATH, self.xpaths["unread"]))
             )
             print("Login detectado! Continuando...")
-        except TimeoutException:
+        except:
             print("Tempo limite atingido. Certifique-se de escanear o QR Code a tempo.")
             self.driver.quit()
 
