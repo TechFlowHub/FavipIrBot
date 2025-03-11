@@ -229,8 +229,8 @@ def respQuestSeven(browser, input_box):
     messages = [
         "📝 *Como declarar o Imposto de Renda?*",
         "",
-        "📍 *Dica:* Se você preferir ter o auxílio de profissionais para preencher sua declaração, a Unifavip Wyden, em Caruaru, oferece esse serviço sem custo! estudantes de contabilidade irão te ajudar a preencher a declaração corretamente e tirar todas as suas dúvidas. 💼👨‍💻",
-        "📍 *Endereço da unidade:* Av. Adjar da Silva Casé, 800 - Indianópolis 55.024-740 Caruaru, PE · Brasil. 🏢"
+        "📍 *Dica:* Se você preferir ter o auxílio de profissionais para preencher sua declaração, o Unifavip Wyden, em Caruaru, oferece esse serviço sem custo com o projeto NAF! Estudantes de contabilidade irão te ajudar a preencher a declaração corretamente e tirar todas as suas dúvidas. 💼👨‍💻",
+        "🌎 *Endereço da unidade:* Av. Adjar da Silva Casé, 800 - Indianópolis 55.024-740 Caruaru, PE · Brasil. 🏢"
         "",
         "1️⃣ *Acesse o programa da Receita Federal* – Baixe o programa no site oficial ou use o aplicativo 'Meu Imposto de Renda'. 📲💻",
         "",
@@ -277,9 +277,13 @@ def respQuestZero(browser, input_box):
     messages = [
         "📴 Atendimento encerrado, volte sempre! 😊",
         "",
-        "📍 Lembre-se: para um atendimento físico, você pode ir até a UniFAVIP! 🏢",
-        "ℹ️ O UniFAVIP Wyden, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
-        "📍 O projeto NAF acontece às quartas-feiras das 14:00 as 17:00h no endereço da unidade: Av. Adjar da Silva Casé, 800 - Indianópolis, 55024-740, Caruaru, PE, Brasil. 🏢"
+        "📍 Lembre-se: para um atendimento físico, você pode ir até o Unifavip Wyden! 🏢",
+        "",
+        "ℹ️ O Unifavip Wyden, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
+        "",
+        "📍 O projeto NAF acontece às quartas-feiras das 14:00h as 17:00h no Unifavip Wyden",
+        "",
+        "🌎 No Endereço: Av. Adjar da Silva Casé, 800 - Indianópolis, 55024-740, Caruaru, PE, Brasil. 🏢"
     ]
 
     for message in messages:
