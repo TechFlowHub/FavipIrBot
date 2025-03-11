@@ -23,6 +23,8 @@ def questions(browser, input_box):
         "",
         "*8* - 🏠 Tenho mais de uma casa, preciso declarar todas?",
         "",
+        "*9* - *🚀 USE NOSSA IA! 🤖✨*",
+        "",
         "*0* - 👋 Para finalizar atendimento"
     ]
 
@@ -276,8 +278,8 @@ def respQuestZero(browser, input_box):
         "📴 Atendimento encerrado, volte sempre! 😊",
         "",
         "📍 Lembre-se: para um atendimento físico, você pode ir até a UniFAVIP! 🏢",
-        "ℹ️ Na UniFAVIP Wyden, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
-        "📍 Endereço da unidade: Av. Adjar da Silva Casé, 800 - Indianópolis, 55.024-740 Caruaru, PE · Brasil. 🏢"
+        "ℹ️ O UniFAVIP Wyden, estudantes de contabilidade estarão prontos para lhe ajudar e orientar no preenchimento do seu imposto de renda! 📄💼",
+        "📍 O projeto NAF acontece às quartas-feiras das 14:00 as 17:00h no endereço da unidade: Av. Adjar da Silva Casé, 800 - Indianópolis, 55024-740, Caruaru, PE, Brasil. 🏢"
     ]
 
     for message in messages:
@@ -304,7 +306,7 @@ def continueQuestion(browser, input_box):
     messages = [
         "🌟 Gostaria de ver o painel de opções novamente?"
         "",
-        "Digite [S] para *SIM*, [N] para *NÃO*, [F] para *FINALIZAR* o atendimento👇😊"
+        "Digite [SIM] para *SIM*, [NAO] para *NÃO*, [F] para *FINALIZAR* o atendimento👇😊"
     ]
 
     for message in messages:
