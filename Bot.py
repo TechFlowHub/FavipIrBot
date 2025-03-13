@@ -325,9 +325,9 @@ class Bot:
             body.send_keys(Keys.ESCAPE)
     def monitor_inactivity(self):
         while True:
-            current_time = time.time()
+            current_time = time()
             for number, last_time in list(self.activity_tracker.items()):
-                if current_time - last_time > 10: 
+                if current_time - last_time > 30: 
                     self.endService(number)       
                     print(f"numero {number} excluido por inatividade")
                     del self.activity_tracker[number]
@@ -341,13 +341,9 @@ class Bot:
                 message = self.openUnreadMessage()
                 if message:
                     number = self.getPhoneNumber()
-                    self.activity_tracker[number] = time.time()
+                    self.activity_tracker[number] = time()
                     print(number)
-                    verify = self.verifyCurrentServiceList(number)  
-                    # AQUI VAI FICAR A FUNÇÃO DE THREAD QUE VAI RECEBER (NUMBER) aqui esta fazendo o seguinte: ele vai abrir a mensagem e pegar o numero
-                    # OU SEJA SE ELE ABRIU A MENSAGEM E PEGOU O NUMERO E POR QUE O USUARIO MANDOU MENSAGEM ENTÃO A THREAD CONTINUA
-                    # POREM SE O NUMERO FICOU 30SEGUNDOS SEM VIR PARA CA A THREAD VAI DAR UM self.endService(number)
-
+                    verify = self.verifyCurrentServiceList(number)
                     if verify:
                         print("numero ja esta salvo na lista de atendimentos")
                     elif verify != True:
