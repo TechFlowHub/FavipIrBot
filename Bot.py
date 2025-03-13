@@ -6,7 +6,9 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.keys import Keys
 from time import sleep
+from time import time
 import requests
+from threading import Thread
 
 from database import dbConfig
 import Menus
@@ -86,6 +88,7 @@ class Bot:
         }
         self.secondList = []
         self.continueList = []
+        self.activity_tracker = {}
         
         self.main()
 
@@ -320,18 +323,30 @@ class Bot:
             input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
             Questions.questions(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
-
+    def monitor_inactivity(self):
+        while True:
+            current_time = time.time()
+            for number, last_time in list(self.activity_tracker.items()):
+                if current_time - last_time > 10: 
+                    self.endService(number)       
+                    print(f"numero {number} excluido por inatividade")
+                    del self.activity_tracker[number]
+            sleep(5)
     def main(self):
         try:
             self.login()
             self.openUnread()
-
+            Thread(target=self.monitor_inactivity, daemon=True).start()
             while True:
                 message = self.openUnreadMessage()
                 if message:
                     number = self.getPhoneNumber()
+                    self.activity_tracker[number] = time.time()
                     print(number)
                     verify = self.verifyCurrentServiceList(number)  
+                    # AQUI VAI FICAR A FUNÇÃO DE THREAD QUE VAI RECEBER (NUMBER) aqui esta fazendo o seguinte: ele vai abrir a mensagem e pegar o numero
+                    # OU SEJA SE ELE ABRIU A MENSAGEM E PEGOU O NUMERO E POR QUE O USUARIO MANDOU MENSAGEM ENTÃO A THREAD CONTINUA
+                    # POREM SE O NUMERO FICOU 30SEGUNDOS SEM VIR PARA CA A THREAD VAI DAR UM self.endService(number)
 
                     if verify:
                         print("numero ja esta salvo na lista de atendimentos")
