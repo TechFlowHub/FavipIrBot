@@ -14,8 +14,6 @@ from database import dbConfig
 import Menus
 import Questions
 
-
-
 from io import BytesIO
 from PIL import Image
 import pyzbar.pyzbar as pyzbar
@@ -63,8 +61,6 @@ def sendResponseWithChatGpt(last_text):
             return "Não foi possível processar a resposta."
     except requests.exceptions.RequestException as e:
         return f"Erro ao fazer a requisição: {e}"
-
-    
 class Bot:
     def __init__(self):
         chrome_options = Options()
@@ -194,7 +190,6 @@ class Bot:
         except TimeoutException:
             print("Erro: Campo de entrada de mensagem não encontrado.")
 
-
     def openUnread(self):
         try:
             unread_button = WebDriverWait(self.driver, 10).until(
@@ -323,6 +318,7 @@ class Bot:
             input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
             Questions.questions(self.driver, input_box)
             body.send_keys(Keys.ESCAPE)
+
     def monitor_inactivity(self):
         while True:
             current_time = time()
@@ -332,6 +328,7 @@ class Bot:
                     print(f"numero {number} excluido por inatividade")
                     del self.activity_tracker[number]
             sleep(5)
+
     def main(self):
         try:
             self.login()
