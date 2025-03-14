@@ -16,7 +16,7 @@ CREATE TABLE current_service (
 CREATE TABLE evaluation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     fk_phone INT NOT NULL,
-    rating INT NOT NULL CHECK (rating >= 0 AND rating <= 5),  
+    rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),  
     created_at DATE DEFAULT (CURRENT_TIMESTAMP),
     FOREIGN KEY (fk_phone) REFERENCES phone(id)
 );

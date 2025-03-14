@@ -84,9 +84,13 @@ class Bot:
         }
         self.secondList = []
         self.continueList = []
+        self.evaluationList = []
         self.activity_tracker = {}
         
         self.main()
+    
+    def refresh_input(self):
+            return self.driver.find_element(By.XPATH, self.xpaths["input_box"])
 
     def login(self):
         print("Abrindo WhatsApp Web...")
@@ -231,6 +235,7 @@ class Bot:
         except Exception as e:
             print(f"Erro em readLastMessage: {e}")
             return None
+        
     def getPhoneNumber(self):
         try:
             WebDriverWait(self.driver, 10).until(
@@ -243,7 +248,6 @@ class Bot:
                 except:
                     print("não foi possivel conseguir o numero de telefone")
                     pass
-                    
         except:
             print("algo deu errado")
 
@@ -282,42 +286,61 @@ class Bot:
             "6": questions.respQuestSix,
             "7": questions.respQuestSeven,
             "8": questions.respQuestEight,
+            "9": questions.respQuestNove,
+            "0": questions.respQuestZero
         }
 
-        if last_text in question_map:
+        if phone in self.evaluationList:
+            try:
+                rating = int(last_text) 
+                if 1 <= rating <= 5:
+                    dbConfig.insertEvaluation(phone, rating)
+                    input_box = self.refresh_input()
+                    menus.evaluationTy(self.driver, input_box)
+                    self.endService(phone)
+                else:
+                    input_box = self.refresh_input()
+                    menus.evaluationError(self.driver, input_box)
+            except ValueError:
+                print("Erro: A avaliação deve ser um número inteiro entre 1 e 5.")
+
+        elif last_text in question_map:
             question_map[last_text](self.driver, input_box)
-            self.continueList.append(phone)
-            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-            questions.continueQuestion(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-        elif phone in self.continueList and (last_text.upper() == "S" or last_text.upper() == "SIM"):
-            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-            questions.questions(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
-            self.continueList.remove(phone)
-        elif phone in self.continueList and (last_text.upper() == "N" or last_text.upper() == "NÃO"):
-            body.send_keys(Keys.ESCAPE)
-            self.continueList.remove(phone)
-        elif phone in self.continueList and (last_text.upper() == "F" or last_text.upper() == "FINALIZAR"):
-            questions.respQuestZero(self.driver, input_box)
-            self.endService(phone)
-            body.send_keys(Keys.ESCAPE)
-            self.continueList.remove(phone)
-        elif last_text == "9":
-            questions.respQuestNove(self.driver, input_box)
-            self.secondList.append(phone)
-            print(f"Usuário adicionado na lista: {self.secondList}")
-            body.send_keys(Keys.ESCAPE)
-        elif last_text == "0":
-            questions.respQuestZero(self.driver, input_box)
-            self.endService(phone)
-            body.send_keys(Keys.ESCAPE)
+
+            if last_text == "9":
+                self.secondList.append(phone)
+                print(f"Usuário adicionado na lista: {self.secondList}")
+            elif last_text == "0":
+                self.evaluationList.append(phone)
+                input_box = self.refresh_input()
+                menus.evaluation(self.driver, input_box)
+            else:
+                self.continueList.append(phone)
+                input_box = self.refresh_input()
+                questions.continueQuestion(self.driver, input_box)
+
+        elif phone in self.continueList:
+            last_text_upper = last_text.upper()
+
+            if last_text_upper in ["S", "SIM"]:
+                input_box = self.refresh_input()
+                questions.questions(self.driver, input_box)
+                self.continueList.remove(phone)
+            elif last_text_upper in ["N", "NÃO"]:
+                self.continueList.remove(phone)
+            elif last_text_upper in ["F", "FINALIZAR"]:
+                questions.respQuestZero(self.driver, input_box)
+                self.continueList.remove(phone)
+                self.evaluationList.append(phone)
+                input_box = self.refresh_input()
+                menus.evaluation(self.driver, input_box)
+
         else:
-            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
             menus.invalidNumber(self.driver, input_box)
-            input_box = self.driver.find_element(By.XPATH, self.xpaths["input_box"])
-            Questions.questions(self.driver, input_box)
-            body.send_keys(Keys.ESCAPE)
+            input_box = self.refresh_input()
+            questions.questions(self.driver, input_box)
+
+        body.send_keys(Keys.ESCAPE)
 
     def monitor_inactivity(self):
         while True:

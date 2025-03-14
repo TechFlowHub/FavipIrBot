@@ -60,3 +60,46 @@ def invalidNumber(browser, input_box):
         time.sleep(0.3)
 
     input_box.send_keys(Keys.ENTER)
+
+def evaluation(browser, input_box):
+    messages = [
+        "⭐ Avalie nosso atendimento! Escolha um número de *1 a 5*: ",
+        "",
+        "🤩 *5 - Excelente*",
+        "😊 *4 - Bom*",
+        "😐 *3 - Regular*",
+        "🙁 *2 - Ruim*",
+        "😞 *1 - Péssimo*"
+    ]
+
+    for message in messages:
+        sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+
+def evaluationTy(browser, input_box):
+    messages = [
+        "🙏 Obrigado por avaliar nosso atendimento!",
+        "",
+        "Sua opinião é muito importante para nós. 💙",
+        "",
+        "Se precisar de mais alguma coisa, estamos à disposição! 😊"
+    ]
+
+    for message in messages:
+        sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
+
+def evaluationError(browser, input_box):
+    messages = [
+       "⚠️ Valor inválido! Por favor, digite um número entre *1 e 5* para avaliar nosso atendimento."
+    ]
+
+    for message in messages:
+        sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)

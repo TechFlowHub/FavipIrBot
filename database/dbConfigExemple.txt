@@ -46,3 +46,17 @@ def doesPhoneExistInCurrentService(phone):
     my_cursor.execute("SELECT * FROM current_service WHERE phone = %s", (phone,))
     existing_phone = my_cursor.fetchone()
     return existing_phone
+
+def getPhoneId(phone):
+    my_cursor.execute("SELECT id FROM phone WHERE phone = %s", (phone,))
+    result = my_cursor.fetchone()
+    return result[0] if result else None  
+
+def insertEvaluation(phone, rating):
+    id_phone = getPhoneId(phone)
+    my_cursor.execute(
+        "INSERT INTO evaluation (fk_phone, rating) VALUES (%s, %s)", 
+        (id_phone, rating)
+    )
+    my_database.commit()
+    return "Avaliação cadastrada com sucesso"
