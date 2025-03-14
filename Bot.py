@@ -328,15 +328,16 @@ class Bot:
                 input_box = self.refresh_input()
                 questions.questions(self.driver, input_box)
                 self.continueList.remove(phone)
-            elif last_text_upper in ["N", "NÃO"]:
-                self.continueList.remove(phone)
             elif last_text_upper in ["F", "FINALIZAR"]:
                 questions.respQuestZero(self.driver, input_box)
                 self.continueList.remove(phone)
                 self.evaluationList.append(phone)
                 input_box = self.refresh_input()
                 menus.evaluation(self.driver, input_box)
-
+            else:
+                input_box = self.refresh_input()
+                menus.optionError(self.driver, input_box)
+                
         else:
             menus.invalidNumber(self.driver, input_box)
             input_box = self.refresh_input()

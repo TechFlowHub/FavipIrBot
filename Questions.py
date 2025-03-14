@@ -308,9 +308,9 @@ def respQuestNove(browser, input_box):
 
 def continueQuestion(browser, input_box):
     messages = [
-        "🌟 Gostaria de ver o painel de opções novamente?"
+        "🌟 Gostaria de ver o painel de opções novamente?",
         "",
-        "Digite [SIM] para *SIM*, [NAO] para *NÃO*, [F] para *FINALIZAR* o atendimento👇😊"
+        "Digite [SIM] para *SIM*, [F] para *FINALIZAR* o atendimento 👇😊, ou escolha uma nova opção entre *1 e 9*."
     ]
 
     for message in messages:

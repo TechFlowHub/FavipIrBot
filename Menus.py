@@ -103,3 +103,18 @@ def evaluationError(browser, input_box):
         input_box.send_keys(Keys.SHIFT, Keys.ENTER)
 
     input_box.send_keys(Keys.ENTER)
+
+def optionError(browser, input_box):
+    messages = [
+       "⚠️ *Opção inválida!*",
+       "",
+       "🌟 Gostaria de ver o painel de opções novamente?",
+       "",
+       "Por favor digite [SIM] para *SIM*, [F] para *FINALIZAR* o atendimento 👇😊, ou escolha uma nova opção entre *1 e 9*."
+    ]
+
+    for message in messages:
+        sendMessege(browser, input_box, message)
+        input_box.send_keys(Keys.SHIFT, Keys.ENTER)
+
+    input_box.send_keys(Keys.ENTER)
