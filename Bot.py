@@ -337,7 +337,7 @@ class Bot:
             else:
                 input_box = self.refresh_input()
                 menus.optionError(self.driver, input_box)
-                
+
         else:
             menus.invalidNumber(self.driver, input_box)
             input_box = self.refresh_input()
@@ -349,7 +349,7 @@ class Bot:
         while True:
             current_time = time()
             for number, last_time in list(self.activity_tracker.items()):
-                if current_time - last_time > 30: 
+                if current_time - last_time >= 420: 
                     self.endService(number)       
                     print(f"numero {number} excluido por inatividade")
                     del self.activity_tracker[number]
