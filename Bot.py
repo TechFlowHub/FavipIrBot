@@ -297,12 +297,14 @@ class Bot:
                     dbConfig.insertEvaluation(phone, rating)
                     input_box = self.refresh_input()
                     menus.evaluationTy(self.driver, input_box)
+                    self.evaluationList.remove(phone)
                     self.endService(phone)
                 else:
                     input_box = self.refresh_input()
                     menus.evaluationError(self.driver, input_box)
             except ValueError:
-                print("Erro: A avaliação deve ser um número inteiro entre 1 e 5.")
+                input_box = self.refresh_input()
+                menus.evaluationError(self.driver, input_box)
 
         elif last_text in question_map:
             question_map[last_text](self.driver, input_box)

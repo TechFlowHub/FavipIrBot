@@ -65,11 +65,11 @@ def evaluation(browser, input_box):
     messages = [
         "⭐ Avalie nosso atendimento! Escolha um número de *1 a 5*: ",
         "",
-        "🤩 *5 - Excelente*",
-        "😊 *4 - Bom*",
-        "😐 *3 - Regular*",
-        "🙁 *2 - Ruim*",
-        "😞 *1 - Péssimo*"
+        "*5 - 🤩 Excelente*",
+        "*4 - 😊 Bom*",
+        "*3 - 😐 Regular*",
+        "*2 - 🙁 Ruim*",
+        "*1 - 😞 Péssimo*"
     ]
 
     for message in messages:
