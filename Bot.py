@@ -73,7 +73,7 @@ class Bot:
         self.link = "https://web.whatsapp.com/"
         self.xpaths = {
             "unread": "/html/body/div[1]/div/div/div[3]/div/div[3]/div/div[2]/button[2]",
-            "phone": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/header/div[2]/div[1]/div/div/span[1]",
+            "phone": f"//*[@id='main']/header/div[2]/div/div/div/div/span",
             "input_box": "/html/body/div[1]/div/div/div[3]/div/div[4]/div/footer/div[1]/div/span/div/div[2]/div[1]/div[2]/div[1]/p",
             "body": "/html/body"
         }
@@ -244,12 +244,19 @@ class Bot:
             for _ in range(3):
                 try:
                     phone_element = self.driver.find_element(By.XPATH, self.xpaths["phone"])
-                    return phone_element.text
-                except:
-                    print("não foi possivel conseguir o numero de telefone")
-                    pass
-        except:
-            print("algo deu errado")
+                    phone_number = phone_element.text
+                    if phone_number and phone_number.strip():
+                        print(f"Número de telefone recuperado: {phone_number}")
+                        return phone_number
+                    print("Elemento encontrado mas texto vazio")
+                except Exception as e:
+                    print(f"Erro ao obter número: {e}")
+                    sleep(1)
+            print("Não foi possível obter o número de telefone após 3 tentativas")
+            return None
+        except Exception as e:
+            print(f"Erro ao encontrar elemento do telefone: {e}")
+            return None
 
     def endService(self, phone_number):
         dbConfig.deletePhoneFromCurrentService(phone_number)
@@ -364,6 +371,13 @@ class Bot:
                 message = self.openUnreadMessage()
                 if message:
                     number = self.getPhoneNumber()
+                    if not number:
+                        print("Não foi possível obter o número de telefone, pulando este chat")
+                        body = self.driver.find_element(By.XPATH, self.xpaths["body"])
+                        body.send_keys(Keys.ESCAPE)
+                        sleep(2)
+                        continue
+                        
                     self.activity_tracker[number] = time()
                     print(number)
                     verify = self.verifyCurrentServiceList(number)

@@ -1,0 +1,8 @@
+selenium
+webdriver-manager
+mysql-connector-python
+requests
+qrcode_terminal
+Pillow
+pyzbar
+numpy

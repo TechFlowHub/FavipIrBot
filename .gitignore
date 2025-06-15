@@ -2,3 +2,4 @@ venv/
 profile/
 database/dbConfig.py
 __pycache__
+.env
